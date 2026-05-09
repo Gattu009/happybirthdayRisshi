@@ -483,7 +483,7 @@
         <div class="locked-state">
           <div class="lock-icon">🎁</div>
           <div class="lock-title">Surprise</div>
-          <div class="unlock-time">Unlocks at 12:00 PM (noon)</div>
+          <div class="unlock-time">Unlocks at 12:00 AM tonight</div>
           <div class="countdown-wrap">
             <div class="cd-unit"><span class="cd-num" id="cd3h">00</span><span class="cd-label">hrs</span></div>
             <div class="cd-unit"><span class="cd-num" id="cd3m">00</span><span class="cd-label">min</span></div>
@@ -667,18 +667,15 @@
 
       // Unlock hints when time arrives
       if (!ready[1] && sMid === 0) {
-        ready[1] = ready[2] = true;
+        ready[1] = ready[2] = ready[3] = true;
         document.getElementById('hint1').textContent = '🎀 Tap the bow to unwrap!';
         document.getElementById('hint2').textContent = '🎀 Tap the bow to unwrap!';
-      }
-      if (!ready[3] && sNoon === 0) {
-        ready[3] = true;
         document.getElementById('hint3').textContent = '🎀 Tap the bow to unwrap!';
       }
 
       if (!document.getElementById('card1').classList.contains('unlocked')) setCD('cd1', sMid);
       if (!document.getElementById('card2').classList.contains('unlocked')) setCD('cd2', sMid);
-      if (!document.getElementById('card3').classList.contains('unlocked')) setCD('cd3', sNoon);
+      if (!document.getElementById('card3').classList.contains('unlocked')) setCD('cd3', sMid);
     }
     tick();
     setInterval(tick, 1000);
@@ -687,17 +684,12 @@
   function checkInitialUnlocks() {
     const now = new Date();
     const todayStart = new Date(); todayStart.setHours(0, 0, 0, 0);
-    const todayNoon  = new Date(); todayNoon.setHours(12, 0, 0, 0);
 
     // Midnight gifts: if page opened on birthday (today >= 00:00), ready to unwrap
     if (now >= todayStart) {
-      ready[1] = ready[2] = true;
+      ready[1] = ready[2] = ready[3] = true;
       document.getElementById('hint1').textContent = '🎀 Tap the bow to unwrap!';
       document.getElementById('hint2').textContent = '🎀 Tap the bow to unwrap!';
-    }
-    // Noon gift
-    if (now >= todayNoon) {
-      ready[3] = true;
       document.getElementById('hint3').textContent = '🎀 Tap the bow to unwrap!';
     }
   }
